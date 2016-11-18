@@ -1,0 +1,22 @@
+﻿<Window x:Class="BBoxBoard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BBoxBoard"
+        mc:Ignorable="d"
+        Title="MainWindow" Background="#FFDBF9DB" Height="750" Width="1200" ResizeMode="CanMinimize">
+    <Grid>
+        <Canvas 
+            Name="Mycanvas"
+            Margin="200,0,0,0">
+            <Rectangle Fill="#FFF4F4F5" Height="80" Canvas.Left="10" Stroke="Black" Canvas.Top="10" Width="60"/>
+            <TextBlock x:Name="textBlock" Height="15.6" Canvas.Left="26.967" TextWrapping="Wrap" Text="删除" Canvas.Top="20.233" Width="24.8"/>
+
+        </Canvas>
+        <ListView x:Name="elecCompList" HorizontalAlignment="Left" Width="200" Height="648" VerticalAlignment="Top">
+        </ListView>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="72.8" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="200" FontSize="20" Text="Hello World！"/>
+
+    </Grid>
+</Window>
