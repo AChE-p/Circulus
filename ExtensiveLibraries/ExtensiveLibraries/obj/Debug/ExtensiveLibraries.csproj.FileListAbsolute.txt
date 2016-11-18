@@ -1,0 +1,5 @@
+D:\Visual Studio Projects\Introduction to Computing\Research Project\ExtensiveLibraries\ExtensiveLibraries\bin\Debug\ExtensiveLibraries.dll
+D:\Visual Studio Projects\Introduction to Computing\Research Project\ExtensiveLibraries\ExtensiveLibraries\bin\Debug\ExtensiveLibraries.pdb
+D:\Visual Studio Projects\Introduction to Computing\Research Project\ExtensiveLibraries\ExtensiveLibraries\obj\Debug\ExtensiveLibraries.csprojResolveAssemblyReference.cache
+D:\Visual Studio Projects\Introduction to Computing\Research Project\ExtensiveLibraries\ExtensiveLibraries\obj\Debug\ExtensiveLibraries.dll
+D:\Visual Studio Projects\Introduction to Computing\Research Project\ExtensiveLibraries\ExtensiveLibraries\obj\Debug\ExtensiveLibraries.pdb
