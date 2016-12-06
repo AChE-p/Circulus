@@ -5,18 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using BBoxBoard.Output;
 
 namespace BBoxBoard.Comp
 {
     public class Resistance : ElecComp
     {
+        public double R;
+
         public Resistance() : base() { }
 
         public override void AddShapes()
         {
-            //必须重新设置元件大小
-            size.X = 60;
-            size.Y = 20;
+            R = 1000;//默认电阻
+            //设置类型
+            Comp = Comp_Resistance;
+            /*//必须重新设置元件大小（已废弃）
+            size.X = 100;
+            size.Y = 20;*/
             //定义外部接口的位置
             RelativeInterface.Add(new IntPoint(0, 10)); //左端口
             RelativeInterface.Add(new IntPoint(100, 10)); //右端口
@@ -66,6 +72,24 @@ namespace BBoxBoard.Comp
             Canvas.SetLeft(circle2.GetEllipse(), 95);
             Canvas.SetTop(circle2.GetEllipse(), 5);
             shapeSet.AddShape(circle2);
+        }
+        public override ElecFeature GetElecFeature()
+        {
+            ResistanceElecFeature resistanceElecFeature =
+                new ResistanceElecFeature();
+            resistanceElecFeature.R = R;
+            return resistanceElecFeature;
+        }
+        class ResistanceElecFeature : ElecFeature
+        {
+            public double R;
+            public override double GetNext(double deltaT)
+            {
+                double U = rQ / rC;
+                double I = U / R;
+                rQ -= I * deltaT;
+                return rQ;
+            }
         }
     }
 }

@@ -35,8 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,10 +57,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Equipment\Ohmmeter.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Equipment\oscilloscope.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Equipment\Voltmeter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="AdvancedDraw\SuspensionWindow .cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -69,14 +80,41 @@
     <Compile Include="Comp\Capacity.cs" />
     <Compile Include="Comp\ElecComp.cs" />
     <Compile Include="Comp\ElecCompSet.cs" />
+    <Compile Include="Comp\ElecGround.cs" />
+    <Compile Include="Comp\Inductance.cs" />
+    <Compile Include="Comp\OhmMeter.cs" />
+    <Compile Include="Comp\Power.cs" />
+    <Compile Include="Comp\Probe.cs" />
     <Compile Include="Comp\Resistance.cs" />
-    <Compile Include="BasicDraw\TransferXY.cs" />
+    <Compile Include="Comp\VoltMeter.cs" />
+    <Compile Include="Comp\Wire.cs" />
+    <Compile Include="Data\contidion.cs" />
+    <Compile Include="Equipment\Ohmmeter.xaml.cs">
+      <DependentUpon>Ohmmeter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment\oscilloscope.xaml.cs">
+      <DependentUpon>oscilloscope.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment\oscilloscopeData.cs" />
+    <Compile Include="Equipment\ShowingData.cs" />
+    <Compile Include="Equipment\Voltmeter.xaml.cs">
+      <DependentUpon>Voltmeter.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Output\BriefElecComp.cs" />
+    <Compile Include="Output\ElecFeature.cs" />
+    <Compile Include="Output\ElecStructure.cs" />
+    <Compile Include="PicAnalysis\Processing.cs" />
+    <Compile Include="PicAnalysis\SimplifiedPic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -103,7 +141,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="Numerics\Numerics.csproj">
+      <Project>{b7cae5f4-a23f-4438-b5be-41226618b695}</Project>
+      <Name>Numerics</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

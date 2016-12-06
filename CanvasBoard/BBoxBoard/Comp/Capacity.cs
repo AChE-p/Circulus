@@ -1,4 +1,5 @@
 ﻿using BBoxBoard.BasicDraw;
+using BBoxBoard.Output;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,21 @@ namespace BBoxBoard.Comp
 {
     public class Capacity : ElecComp
     {
+        public double C;
+
         public Capacity() : base() { }
 
         public override void AddShapes()
         {
-            //必须重新设置元件大小
+            C = 0.01; //默认电容
+            //设置类型
+            Comp = Comp_Capacity;
+            /*//必须重新设置元件大小（已废弃）
             size.X = 60;
-            size.Y = 40;
+            size.Y = 40;*/
+            //定义外部接口的位置
+            RelativeInterface.Add(new IntPoint(0, 20)); //左端口
+            RelativeInterface.Add(new IntPoint(70, 20)); //右端口
             //左边的导线
             MyShape line1 = new MyShape(MyShape.Shape_Line);
             line1.GetLine().Stroke = System.Windows.Media.Brushes.Red;
@@ -73,6 +82,31 @@ namespace BBoxBoard.Comp
             Canvas.SetLeft(circle2.GetEllipse(), 65);
             Canvas.SetTop(circle2.GetEllipse(), 15);
             shapeSet.AddShape(circle2);
+        }
+
+        class CapacityElecFeature : ElecFeature
+        {
+            //public double Q;
+            //public double C;
+
+            public CapacityElecFeature(double C_) : base()
+            {
+                //Q = 0;
+                //C = C_;
+                rC = C_;
+            }
+
+            public override double GetNext(double deltaT)
+            {
+                //double Qsum = rQ + Q;
+                //Q = Qsum * C / (rC + C);
+                //rQ = Qsum * rC / (rC + C);
+                return rQ;
+            }
+        }
+        public override ElecFeature GetElecFeature()
+        {
+            return new CapacityElecFeature(C);
         }
     }
 }
