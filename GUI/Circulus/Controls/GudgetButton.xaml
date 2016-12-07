@@ -1,0 +1,116 @@
+﻿<Button x:Class="Circulus.GudgetButton"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:Circulus"
+        mc:Ignorable="d" Background="#7EC2FF" Opacity="0.5" BorderThickness="0" Height="60" Width="60" >
+    <Button.Resources>
+        <Style x:Key="FIcon" TargetType="TextBlock">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style x:Key="DefaultGudgetButton" TargetType="{x:Type local:GudgetButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate x:Name="Button_Template" TargetType="{x:Type local:GudgetButton}">
+                        <Border x:Name="border" Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path= Background}" 
+                                    Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Height}" 
+                                    CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=CornerRadius}" 
+                                    Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Width}">
+                            <!--Icon/Text-->
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" 
+                        Margin="{TemplateBinding Padding}"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                                <TextBlock x:Name="icon"  Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=FIconMargin}" 
+                           RenderTransformOrigin="0.5,0.5" Style="{StaticResource FIcon}"
+                           Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path= FIcon}" 
+                           FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path= FIconSize}" 
+                           Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path= Foreground}">
+                                    <TextBlock.RenderTransform>
+                                        <RotateTransform x:Name="transIcon" Angle="0"/>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+
+                                <TextBlock VerticalAlignment="Center"  x:Name="txt" 
+                           TextDecorations="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ContentDecorations}" 
+                                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Content}" 
+                                               FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=FontSize}" 
+                                               Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Foreground}"></TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <!--触发器-->
+                        <ControlTemplate.Triggers>
+                            <!--设置鼠标进入时的背景、前景样式-->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
+                                Path=MouseOverBackground}" TargetName="border" />
+                                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
+                                Path=MouseOverForeground}" TargetName="icon"/>
+                                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
+                                Path=MouseOverForeground}" TargetName="txt"/>
+                            </Trigger>
+                            <!--Ficon的动画触发器-->
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="true"></Condition>
+                                    <Condition Property="AllowsAnimation" Value="true"></Condition>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="Angle" To="180" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="transIcon" Storyboard.TargetProperty="Angle" To="0" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+                            <!--鼠标按下时的前景、背景样式-->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
+                                Path=PressedBackground}" TargetName="border" />
+                                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
+                                Path=PressedForeground}" TargetName="icon"/>
+                                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, 
+                                Path=PressedForeground}" TargetName="txt"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" Value="0.5" TargetName="border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TransparentButton" TargetType="{x:Type local:GudgetButton}" BasedOn="{StaticResource DefaultGudgetButton}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="MouseOverBackground" Value="Transparent" />
+            <Setter Property="PressedBackground" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="MouseOverForeground" Value="{Binding}" />
+            <Setter Property="PressedForeground" Value="{Binding}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FIconSize" Value="20" />
+            <Setter Property="Padding" Value="3,1,3,1" />
+            <Setter Property="Content" Value="" />
+            <Setter Property="FIconMargin" Value="0,0,2,0" />
+            <Setter Property="AllowsAnimation" Value="False" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </Button.Resources>
+
+    <Grid Height="{Binding}" Width="{Binding}">
+        <local:GudgetButton FIcon="&#x2750;" Margin="1,-5,1,1" FIconMargin="0" FontSize="2" FIconSize="50" Style="{DynamicResource TransparentButton}" ></local:GudgetButton>
+
+    </Grid>
+
+</Button>

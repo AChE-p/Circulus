@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Circulus.CircularProgressBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+             xmlns:local="clr-namespace:Circulus"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="200">
+    <UserControl.Resources>
+        <local:PercentToAngleConverter x:Key="p2aConverter"/>
+        <local:ThicknessToDoubleConverter x:Key="t2dConverter"/>
+        <Style x:Key="CircularStyle" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Background" Value="#C1D1DE"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="300"/>
+            <Setter Property="BorderBrush" Value="BlueViolet"/>
+            <Setter Property="BorderThickness" Value="60"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Maximum" Value="1"/>
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="Value" Value="0"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Grid Margin="{TemplateBinding Margin}" SnapsToDevicePixels="True" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                                <ed:Arc x:Name="BackArc" Margin="{TemplateBinding Margin}" Opacity="0.6" ArcThickness="{Binding Path=BorderThickness,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay,Converter={StaticResource t2dConverter}}" StartAngle="0" Fill="{TemplateBinding Background}" EndAngle="360" Stretch="None"/>
+                                <ed:Arc x:Name="ValueArc" Margin="{TemplateBinding Margin}" ArcThickness="{Binding Path=BorderThickness,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay,Converter={StaticResource t2dConverter}}" StartAngle="0" Fill="{TemplateBinding BorderBrush}" Stretch="None" Panel.ZIndex="2" EndAngle="{TemplateBinding Value, Converter={StaticResource p2aConverter}}"/>
+                            </Grid>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Width="200" Height="200" x:Name="grid">
+        <ProgressBar x:Name="CircularBar" Style="{StaticResource CircularStyle}" Margin="0" Width="200" Height="200" BorderThickness="20" BorderBrush="#EF436F" SmallChange="0.001" Value="0"/>
+        <TextBlock x:Name="TextPercent" FontFamily="Noto Sans CJK Medium" FontSize="30" Text="{Binding Value,Mode=OneWay,ElementName=CircularBar,StringFormat={}{0:p1}}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="41,80,40,76" />
+    </Grid>
+</UserControl>

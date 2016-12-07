@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="Circulus.SliderBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Circulus"
+             mc:Ignorable="d" Height="18" Width="300">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="SliderBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#59CCFC" Offset="0"/>
+            <GradientStop Color="#00B3FE" Offset="0.5"/>
+            <GradientStop Color="#59CCFC" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="SliderThumbBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFD9D3E8" Offset="0" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="SliderTextBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#7CCE45" Offset="0"/>
+            <GradientStop Color="#4EA017" Offset="1"/>
+        </LinearGradientBrush>
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="{StaticResource SliderBackgroundBrush}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderRepeatButtonT" TargetType="RepeatButton">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{StaticResource SliderBackgroundBrush}"/>
+                            <Border Grid.ColumnSpan="2" CornerRadius="7" Background="{StaticResource SliderBackgroundBrush}" Width="15">
+                                <TextBlock Text="&#x2771;" Foreground="Cyan" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderStyle" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid>
+                            <!--<Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>-->
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="5" ShadowDepth="0.5"/>
+                            </Grid.Effect>
+                            <!--<Border HorizontalAlignment="Right" BorderBrush="Gray" BorderThickness="1,1,0,1" Background="{StaticResource SliderTextBrush}" Width="80" CornerRadius="8,0,0,8"/>
+                            <Border Grid.Column="2" HorizontalAlignment="Right" BorderBrush="Gray" BorderThickness="0,1,1,1" Background="{StaticResource SliderTextBrush}" Width="40" CornerRadius="0,8,8,0"/>-->
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Tag}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+                            <TextBlock Grid.Column="2" Text="{Binding ElementName=PART_Track,Path=Value,StringFormat=\{0:N2\}}" Panel.ZIndex="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" DataContext="{Binding}"/>
+                            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="0.6" CornerRadius="0,8,8,0">
+                                <Track Grid.Column="1" Name="PART_Track">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.DecreaseLarge"/>
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Style="{StaticResource SliderRepeatButtonT}" Command="Slider.IncreaseLarge"/>
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Style="{StaticResource SliderThumb}"/>
+                                    </Track.Thumb>
+                                </Track>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Slider x:Name="slider" Style="{DynamicResource SliderStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="18" SmallChange="0"/>
+
+    </Grid>
+</UserControl>

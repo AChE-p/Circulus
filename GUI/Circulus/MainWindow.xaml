@@ -1,0 +1,176 @@
+﻿<Window x:Class="Circulus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+        xmlns:my="clr-namespace:Circulus"
+        xmlns:local="clr-namespace:Circulus"
+        mc:Ignorable="d"
+        Title="Circulus" Height="644.75" Width="725" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Closing="Window_Closing" FontFamily="Noto Sans CJK Regular" FontSize="12">
+    <Window.Resources>
+        <Style x:Key="MenuItemStyle" TargetType="{x:Type Control}">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontFamily" Value="Noto Sans CJK Regular" />
+            <Setter Property="FontSize" Value="14" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#FF5DDEFC" />
+                    <Setter Property="FontWeight" Value="Medium" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <LinearGradientBrush x:Key="PressedGradientButtonBrush" StartPoint="0.5,1" EndPoint="0.5,0">
+            <GradientStop Color="#FFE4FDEC" Offset="0.2"/>
+            <GradientStop Color="WhiteSmoke" Offset="0.5"/>
+            <GradientStop Color="#FFE4FDEC" Offset="0.8"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="MouseOverGradientButtonBrush" StartPoint="0.5,1" EndPoint="0.5,0">
+            <GradientStop Color="#FF7EC2FF" Offset="0.15"/>
+            <GradientStop Color="WhiteSmoke" Offset="0.35"/>
+            <GradientStop Color="White" Offset="0.5"/>
+            <GradientStop Color="WhiteSmoke" Offset="0.65"/>
+            <GradientStop Color="#FF7EC2FF" Offset="0.85"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="MaskButtonBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="LightGray" Offset="0"/>
+            <GradientStop Color="Transparent" Offset="0.3"/>
+        </LinearGradientBrush>
+        <Style x:Key="CircularButtonStyle" TargetType="Button">
+            <Setter Property="MinWidth" Value="40" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="88" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Foreground" Value="#FF7EC2FF" />
+            <Setter Property="FontFamily" Value="Noto Sans CJK Regular" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="AppButton" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <Grid Margin="0,14,0,5" HorizontalAlignment="Center" MinWidth="40">
+                                    <Ellipse x:Name="PressedEllipse" Fill="{TemplateBinding Foreground}" Opacity="0" Width="40" Height="40"/>
+                                    <Ellipse x:Name="MouseOverEllipse" Fill="#7F8D8D8D" Opacity="0" Width="40" Height="40"/>
+                                    <Ellipse x:Name="NormalEllipse" Fill="Transparent" Stroke="{TemplateBinding Foreground}" StrokeThickness="2" />
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="EllipseInnerContent" />
+                                </Grid>
+                                <TextBlock x:Name="LabelText" TextWrapping="Wrap" HorizontalAlignment="Center" FontFamily="Noto Sans CJK Regular" FontSize="18" Text="{TemplateBinding Tag}" Foreground="{TemplateBinding Foreground}"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="StrokeThickness" TargetName="NormalEllipse" Value="3"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="MouseOverEllipse" Property="Opacity" Value="0.15"/>
+                                <Setter Property="StrokeThickness" TargetName="NormalEllipse" Value="3"/>
+                                <Setter Property="FontFamily" TargetName="LabelText" Value="Noto Sans CJK Medium"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="PressedEllipse" Property="Opacity" Value="0.25"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Stroke" TargetName="NormalEllipse" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="Fill" TargetName="NormalEllipse" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="Opacity" TargetName="NormalEllipse" Value="0.65"/>
+                                <Setter Property="TextElement.Foreground" TargetName="EllipseInnerContent" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                <Setter Property="Foreground" TargetName="LabelText" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter Property="StrokeThickness" TargetName="NormalEllipse" Value="3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ContextMenu x:Key="CommonContextMenu" Style="{StaticResource MenuItemStyle}">
+            <!--<MenuItem Header="" x:Name="" Click=""/>-->
+        </ContextMenu>
+        <!--在此定义上下文关联菜单-->
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RoundRectangularButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="#FF7EC2FF"/>
+            <Setter Property="BorderBrush" Value="#FFE2E3E3"/>
+            <Setter Property="FontFamily" Value="Noto Sans CJK DemiLight" />
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.8" />
+            <Setter Property="BorderThickness" Value="0.1,0.1,1.6,1.6" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" CornerRadius="4">
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                            <Rectangle x:Name="mask" RadiusX="4" RadiusY="4" Fill="{DynamicResource MaskButtonBrush}" Opacity="0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFA5A7A7"/>
+                                <Setter Property="BorderThickness" Value="0.1,0.1,1.8,1.8" />
+                                <Setter Property="Foreground" Value="SteelBlue" />
+                                <Setter Property="Background" Value="#FFB4F9CB" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="{DynamicResource MouseOverGradientButtonBrush}"/>
+                                <Setter Property="FontFamily" Value="Noto Sans CJK Medium" />
+                                <Setter Property="Foreground" Value="#FF7EC2FF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFA5A7A7"/>
+                                <Setter Property="BorderThickness" Value="0.1,0.1,1.8,1.8" />
+                                <Setter Property="Foreground" Value="SteelBlue" />
+                                <Setter Property="Background" Value="{DynamicResource PressedGradientButtonBrush}" />
+                                <Setter Property="FontFamily" Value="Noto Sans CJK Bold" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter TargetName="mask" Property="Opacity" Value="0.65"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--在此定义其他样式-->
+
+    </Window.Resources>
+
+    <Grid>
+        <Button x:Name="button1" Content="赵玉凤" Margin="10,10,627,0" Style="{DynamicResource RoundRectangularButtonStyle}" Height="52" VerticalAlignment="Top" />
+        <Button x:Name="button5" Content="&#x2756;" Tag="刘龚熠" Margin="0,10,551,0" Style="{DynamicResource CircularButtonStyle}" Width="71" VerticalAlignment="Top" />
+        <my:OrangeSliderBar x:Name="Slider3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="18" Margin="10,192,0,0"/>
+        <my:GreenPlainSliderBar x:Name="Slider5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="18" Margin="10,146,0,0"/>
+        <my:RedPlainSliderBar x:Name="Slider6" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="18" Margin="10,169,0,0"/>
+        <my:ExtendedTextBox HorizontalAlignment="Left" Margin="10,247.25,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+        <my:FunctionedTextBox HorizontalAlignment="Left" Margin="10,282.25,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+        <local:CircularProgressBar Margin="328,32.6,174.5,0" VerticalAlignment="Top" Height="217.25"/>
+        <local:GreenSliderBar Margin="10,123,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <local:PlainSliderBar Margin="10,98,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <local:SliderBar Margin="10,219.04,0,0" VerticalAlignment="Top" d:LayoutOverrides="Width, Height" HorizontalAlignment="Left"/>
+
+    </Grid>
+</Window>
