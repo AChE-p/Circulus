@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comp\ACPower.cs" />
     <Compile Include="Record\LayoutRecord.cs" />
     <Compile Include="Record\SaveCircDialog.xaml.cs">
       <DependentUpon>SaveCircDialog.xaml</DependentUpon>

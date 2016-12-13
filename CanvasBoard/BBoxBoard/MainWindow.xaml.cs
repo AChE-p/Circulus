@@ -60,6 +60,8 @@ namespace BBoxBoard
             StringArr.Add("地");
             StringArr.Add("红色探针");
             StringArr.Add("黑色探针");
+            StringArr.Add("直流电源");
+            StringArr.Add("交流电源");
             this.elecCompList.ItemsSource = StringArr;
             this.elecCompList.MouseDoubleClick += ElecCompList_MouseDoubleClick;
             //UpdateList();
@@ -253,6 +255,16 @@ namespace BBoxBoard
                         myOscilloscope.SyncSettings();
                         elecCompSet.AddCompAndShow(pb, Mycanvas);
                         pb.Move(100, 100);
+                        break;
+                    case 9:
+                        Power p = new Power(5);
+                        elecCompSet.AddCompAndShow(p, Mycanvas);
+                        p.Move(100, 100);
+                        break;
+                    case 10:
+                        ACPower ap = new ACPower(0, 0.1, 10);
+                        elecCompSet.AddCompAndShow(ap, Mycanvas);
+                        ap.Move(100, 100);
                         break;
                 }
             }

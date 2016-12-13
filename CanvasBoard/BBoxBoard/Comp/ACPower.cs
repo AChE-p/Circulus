@@ -11,26 +11,36 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
+public enum Powermode { sine_wave,cosine_wave, square_wave, stw}
 namespace BBoxBoard.Comp
 {
-    public class Power :ElecComp
+    public class ACPower : ElecComp
     {
-        PowerElecFeature powerElecFeature;
+        ACPowerElecFeature acpowerElecFeature;
 
-        public Power(double _voltage ) : this()
+        public ACPower(Powermode _powermode,double _frequency, double _pp_value ) :this()
         {
-            powerElecFeature.voltage = _voltage;
+            acpowerElecFeature.frequency = _frequency;
+            acpowerElecFeature.pp_value = _pp_value;
+            acpowerElecFeature.powermode = _powermode;
+            acpowerElecFeature.CommitAttr();
+
+
+
         }
-        public Power():base()
+        public ACPower() : base()
         {
-            powerElecFeature = new PowerElecFeature();
-            powerElecFeature.voltage = 0;
+            acpowerElecFeature = new ACPowerElecFeature();
+            acpowerElecFeature.pp_value = 0;
+            acpowerElecFeature.frequency = 1;
+            acpowerElecFeature.powermode =0;
+            acpowerElecFeature.CommitAttr();
         }
 
         public override void AddShapes()
         {
             //设置类型
-            Comp = Comp_Power;
+            Comp = Comp_ACPower;
             /*//必须重新设置元件大小（已废弃）
             size.X = 100;
             size.Y = 20;*/
@@ -48,7 +58,7 @@ namespace BBoxBoard.Comp
             shapeSet.AddShape(line1);
             //中间的长方形
             MyShape rectangle = new MyShape(MyShape.Shape_Rectangle);
-            rectangle.GetRectangle().Fill = System.Windows.Media.Brushes.Beige;
+            rectangle.GetRectangle().Fill = System.Windows.Media.Brushes.Bisque;
             rectangle.GetRectangle().Width = 40;
             rectangle.GetRectangle().Height = 20;
             Canvas.SetLeft(rectangle.GetRectangle(), 30);
@@ -56,7 +66,7 @@ namespace BBoxBoard.Comp
             shapeSet.AddShape(rectangle);
             //右边的导线
             MyShape line2 = new MyShape(MyShape.Shape_Line);
-            line2.GetLine().Stroke = System.Windows.Media.Brushes.BlueViolet;
+            line2.GetLine().Stroke = System.Windows.Media.Brushes.Navy;
             line2.GetLine().X1 = 70;
             line2.GetLine().Y1 = 10;
             line2.GetLine().X2 = 100;
@@ -67,7 +77,7 @@ namespace BBoxBoard.Comp
             MyShape circle1 = new MyShape(MyShape.Shape_Ellipse);
             circle1.GetEllipse().Fill = System.Windows.Media.Brushes.Red;
             circle1.GetEllipse().StrokeThickness = 3;
-            circle1.GetEllipse().Stroke = System.Windows.Media.Brushes.Yellow;
+            circle1.GetEllipse().Stroke = System.Windows.Media.Brushes.Navy;
             circle1.GetEllipse().Width = 10;
             circle1.GetEllipse().Height = 10;
             Canvas.SetLeft(circle1.GetEllipse(), -5);
@@ -87,24 +97,60 @@ namespace BBoxBoard.Comp
 
         public override ElecFeature GetElecFeature()
         {
-            return powerElecFeature;
+            return acpowerElecFeature;
         }
 
-        class PowerElecFeature : ElecFeature
+        class ACPowerElecFeature : ElecFeature
         {
-            public double voltage;
-            public PowerElecFeature() : base()
+            public double frequency;
+            public Powermode powermode;
+            public double pp_value;
+            double period;
+            double Tsum;
+            public ACPowerElecFeature() : base()
             {
                 rC = Default_rC * 1e5;
+            }
+            public void CommitAttr()
+            {
+                Tsum = 0;
+                period = 1 / frequency;
             }
 
             public override double GetNext(double deltaT)
             {
-                rQ = rC * voltage;
+                Tsum += deltaT;
+                if (Tsum >= period) Tsum -= period;
+                double U = 0;
+                switch (powermode)
+                {
+                    case Powermode.cosine_wave:
+                        U = pp_value * Math.Cos(2 * Math.PI * frequency * Tsum);
+                        break;
+
+                    case Powermode.sine_wave:
+                        U = pp_value * Math.Sin(2 * Math.PI * frequency * Tsum);
+                        break;
+
+                    case Powermode.square_wave:
+
+                        if (Tsum <= 0.5 * period) U = pp_value;
+                        else U = -pp_value;
+                        break;
+                    case Powermode.stw:
+                        if (Tsum <= 0.25 * period)
+                            U = 4 * Tsum * pp_value / period;
+                        else if (Tsum > 0.25 * period && Tsum <= 0.75 * period)
+                            U = -(4 * (Tsum - 0.5 * period) * pp_value) / period;
+                        else
+                            U = 4 * (Tsum - period) * pp_value / period;
+                        break;
+                }
+                rQ = rC * U;
                 return rQ;
             }
+
         }
     }
 }
 
-    

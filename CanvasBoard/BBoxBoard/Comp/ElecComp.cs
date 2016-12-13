@@ -25,6 +25,8 @@ namespace BBoxBoard.Comp
         public const int Comp_IMeter = 6;
         public const int Comp_Ground = 7;
         public const int Comp_Probe = 8;
+        public const int Comp_Power = 9;
+        public const int Comp_ACPower = 10;
 
         protected ShapeSet shapeSet;
         protected IntPoint XYPoint;
