@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using BBoxBoard.Data;
 using System.IO;
 using Microsoft.Win32;
+using BBoxBoard.Record;
 
 namespace BBoxBoard
 {
@@ -168,15 +169,7 @@ namespace BBoxBoard
             }
             else if (e.Key == Key.S)
             {
-                MessageBox.Show("Saving!");
-                String SaveingStr = "";
-                SaveingStr += elecCompSet.PrintSavingAll();
-                byte[] myByte = System.Text.Encoding.UTF8.GetBytes(SaveingStr);
-
-                using (FileStream fsWrite = new FileStream(@"D:\1.circ", FileMode.Create))
-                {
-                    fsWrite.Write(myByte, 0, myByte.Length);
-                };
+                LayoutRecord.Save(elecCompSet);
             }
             if (e.Key == Key.O)
             {
@@ -187,46 +180,7 @@ namespace BBoxBoard
                     str += b + "\n";
                 }
                 MessageBox.Show(str); //之前写的演示用的，注释掉，现在是打开文件*/
-                OpenFileDialog fd = new OpenFileDialog();
-                fd.Filter = "ir files (*.circ)|*.circ";
-                fd.ShowReadOnly = true;
-                if (!fd.ShowDialog().Value) return;
-                String openingFileName = fd.FileName;
-                //MessageBox.Show(openingFileName);
-                using (FileStream fsRead = new FileStream(openingFileName, FileMode.Open))
-                {
-                    int fsLen = (int)fsRead.Length;
-                    byte[] heByte = new byte[fsLen];
-                    int r = fsRead.Read(heByte, 0, heByte.Length);
-                    string myStr = System.Text.Encoding.UTF8.GetString(heByte);
-                    Console.WriteLine(myStr);
-                    String[] Strsp = myStr.Split('\n');
-                    for (int i = 0; i < Strsp.Length - 1; i++)
-                    {
-                        Console.WriteLine("(" + i + "):" + Strsp[i]);
-                        String[] singleSp = Strsp[i].Split(' ');
-                        if (singleSp.Length != 5)
-                        {
-                            MessageBox.Show("Record Wrong!");
-                        }
-                        for (int j = 0; j < singleSp.Length; j++)
-                        {
-                            Console.WriteLine("    (" + j + "):" + singleSp[j]);
-                        }
-                        int Comp = int.Parse(singleSp[0]);
-                        int RotateState = int.Parse(singleSp[1]);
-                        int X = int.Parse(singleSp[2]);
-                        int Y = int.Parse(singleSp[3]);
-                        //这里需要补充一句attribute
-                        ElecComp x = elecCompSet.AddFromRecord(Comp, Mycanvas);
-                        x.Move(X, Y);
-                        for (int j = 0; j < RotateState; j++)
-                        {
-                            x.RotateLeft();
-                        }
-                        x.HandleAttr(singleSp[4]);
-                    }
-                }
+                LayoutRecord.Read(elecCompSet, Mycanvas);
             }
         }
         private void ElecCompList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
