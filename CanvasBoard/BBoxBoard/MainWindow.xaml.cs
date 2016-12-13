@@ -147,16 +147,6 @@ namespace BBoxBoard
                 List<BriefElecComp> A = GetAllComp();
                 SimplifiedPic simplifiedPic = new SimplifiedPic(A, this);
             }
-            if (e.Key == Key.O)
-            {
-                List<BriefElecComp> A = GetAllComp();
-                String str = "";
-                foreach (BriefElecComp b in A)
-                {
-                    str += b + "\n";
-                }
-                MessageBox.Show(str);
-            }
             else if (e.Key == Key.I)
             {
                 MessageBox.Show(elecCompSet.ToString());
@@ -176,6 +166,16 @@ namespace BBoxBoard
             else if (e.Key == Key.S && elecCompSet.pressedElecComp != null)
             {
                 elecCompSet.pressedElecComp.State = ElecComp.State_Move;
+            }
+            if (e.Key == Key.O)
+            {
+                /*List<BriefElecComp> A = GetAllComp();
+                String str = "";
+                foreach (BriefElecComp b in A)
+                {
+                    str += b + "\n";
+                }
+                MessageBox.Show(str);*/
             }
         }
 
