@@ -118,5 +118,51 @@ namespace BBoxBoard.Comp
                 }
             }
         }
+        public String PrintSavingAll()
+        {
+            String Str = "";
+            foreach (ElecComp x in elecSet)
+            {
+                Str += x.PrintSaving() + "\r\n";
+            }
+            return Str;
+        }
+
+        public ElecComp AddFromRecord(int Comp, Canvas Mycanvas)
+        {
+            ElecComp elecComp = null;
+            switch (Comp)
+            {
+                case ElecComp.Comp_Wire:
+                    Wire w = new Wire();
+                    AddCompAndShow(w, Mycanvas);
+                    elecComp = w;
+                    break;
+                case ElecComp.Comp_Resistance:
+                    Resistance r = new Resistance();
+                    AddCompAndShow(r, Mycanvas);
+                    elecComp = r;
+                    break;
+                case ElecComp.Comp_Capacity:
+                    Capacity c = new Capacity();
+                    AddCompAndShow(c, Mycanvas);
+                    elecComp = c;
+                    break;
+                case ElecComp.Comp_Inductance:
+                    Inductance i = new Inductance();
+                    AddCompAndShow(i, Mycanvas);
+                    elecComp = i;
+                    break;
+            }
+            return elecComp;
+        }
+
+        public void ShowAllMeter()
+        {
+            foreach (ElecComp x in elecSet)
+            {
+                x.ShowMeter();
+            }
+        }
     }
 }

@@ -99,6 +99,10 @@ namespace BBoxBoard.Comp
             }
             return false;
         }
+        public override void ShowMeter()
+        {
+            ohmmeterWindow.Activate();
+        }
         public override ElecFeature GetElecFeature()
         {
             OhmMeterElecFeature ohmMeterElecFeature
