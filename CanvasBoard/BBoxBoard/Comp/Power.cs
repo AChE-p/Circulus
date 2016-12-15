@@ -100,6 +100,15 @@ namespace BBoxBoard.Comp
                 return rQ;
             }
         }
+
+        public override string PrintAttr()
+        {
+            return "" + voltage;
+        }
+        public override void HandleAttr(string attr)
+        {
+            voltage = int.Parse(attr);
+        }
     }
 }
 

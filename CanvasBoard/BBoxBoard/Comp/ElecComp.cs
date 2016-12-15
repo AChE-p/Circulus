@@ -315,7 +315,7 @@ namespace BBoxBoard.Comp
         //    elecComp = elecComp_;
         //    //MessageBox.Show("Choose" + elecComp.Comp);
         //    switch (elecComp.Comp)
-        protected virtual String PrintAttr()
+        public virtual String PrintAttr()
         {
             
         
