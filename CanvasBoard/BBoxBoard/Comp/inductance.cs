@@ -14,11 +14,13 @@ namespace BBoxBoard.Comp
 {
     public class Inductance : ElecComp
     {
+        public double L;
         public Inductance() : base() { }
 
         public override void AddShapes()
         {
             //设置类型
+            L = 0.001;
             Comp = Comp_Inductance;
             /*//必须重新设置元件大小（已废弃）
             size.X = 100;
@@ -141,10 +143,10 @@ namespace BBoxBoard.Comp
             pointC.Add(new Point(80, 10.0));
         }
 
-        public override ElecFeature GetElecFeature()
-        {
-            return new InductanceElecFeature(25);
-        }
+        //public override ElecFeature GetElecFeature()
+        //{
+        //    return new InductanceElecFeature(25);
+        //}
 
         class InductanceElecFeature : ElecFeature
         {

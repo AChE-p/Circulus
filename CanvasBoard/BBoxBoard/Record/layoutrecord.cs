@@ -40,9 +40,9 @@ namespace BBoxBoard.Record
                 int fsLen = (int)fsRead.Length;
                 byte[] heByte = new byte[fsLen];
                 int r = fsRead.Read(heByte, 0, heByte.Length);
-                string myStr = System.Text.Encoding.UTF8.GetString(heByte);
+                string myStr = Encoding.UTF8.GetString(heByte);
                 Console.WriteLine(myStr);
-                String[] Strsp = myStr.Split('\n');
+                string[] Strsp = myStr.Split('\n');
                 for (int i = 0; i < Strsp.Length - 1; i++)
                 {
                     Console.WriteLine("(" + i + "):" + Strsp[i]);

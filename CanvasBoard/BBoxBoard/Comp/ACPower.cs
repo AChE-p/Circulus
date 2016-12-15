@@ -32,7 +32,7 @@ namespace BBoxBoard.Comp
         {
             acpowerElecFeature = new ACPowerElecFeature();
             acpowerElecFeature.pp_value = 0;
-            acpowerElecFeature.frequency = 1;
+            acpowerElecFeature.frequency = 0;
             acpowerElecFeature.powermode =0;
             acpowerElecFeature.CommitAttr();
         }

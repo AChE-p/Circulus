@@ -257,7 +257,7 @@ namespace BBoxBoard
                         pb.Move(100, 100);
                         break;
                     case 9:
-                        Power p = new Power(5);
+                        Power p = new Power();
                         elecCompSet.AddCompAndShow(p, Mycanvas);
                         p.Move(100, 100);
                         break;

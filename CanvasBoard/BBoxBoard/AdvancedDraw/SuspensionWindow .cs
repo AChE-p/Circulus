@@ -62,6 +62,36 @@ namespace BBoxBoard.AdvancedDraw
                     textBox1.KeyUp += TextBox1_KeyUp;
                     mainWindow.Mycanvas.Children.Add(textBox1);
                     break;
+                case ElecComp.Comp_Inductance:
+                    textBlock1 = new TextBlock();
+                    textBlock1.Width = 30;
+                    textBlock1.Text = "H";
+                    Canvas.SetLeft(textBlock1, postion.X + 75);
+                    Canvas.SetTop(textBlock1, postion.Y - 30);
+                    mainWindow.Mycanvas.Children.Add(textBlock1);
+                    textBox1 = new TextBox();
+                    textBox1.Width = 70;
+                    textBox1.Text = "" + ((Inductance)elecComp).L;
+                    Canvas.SetLeft(textBox1, postion.X);
+                    Canvas.SetTop(textBox1, postion.Y - 30);
+                    textBox1.KeyUp += TextBox1_KeyUp;
+                    mainWindow.Mycanvas.Children.Add(textBox1);
+                    break;
+                case ElecComp.Comp_Power:
+                    textBlock1 = new TextBlock();
+                    textBlock1.Width = 30;
+                    textBlock1.Text = "V";
+                    Canvas.SetLeft(textBlock1, postion.X + 75);
+                    Canvas.SetTop(textBlock1, postion.Y - 30);
+                    mainWindow.Mycanvas.Children.Add(textBlock1);
+                    textBox1 = new TextBox();
+                    textBox1.Width = 70;
+                    textBox1.Text = "" + ((Power)elecComp).voltage;
+                    Canvas.SetLeft(textBox1, postion.X);
+                    Canvas.SetTop(textBox1, postion.Y - 30);
+                    textBox1.KeyUp += TextBox1_KeyUp;
+                    mainWindow.Mycanvas.Children.Add(textBox1);
+                    break;
                 default:
                     IsNowShown = false;
                     elecComp = null;
@@ -116,6 +146,32 @@ namespace BBoxBoard.AdvancedDraw
                     {
                         Capacity capacity = (Capacity)elecComp;
                         capacity.C = C;
+                        ReleaseChooses();
+                    }
+                    else
+                    {
+                        MessageBox.Show("输入不是数字");
+                    }
+                    break;
+                case ElecComp.Comp_Inductance:
+                    double L;
+                    if (IsNumeric(textBox1.Text, out L))
+                    {
+                        Inductance inductance  = (Inductance)elecComp;
+                        inductance.L = L;
+                        ReleaseChooses();
+                    }
+                    else
+                    {
+                        MessageBox.Show("输入不是数字");
+                    }
+                    break;
+                case ElecComp.Comp_Power:
+                    double V;
+                    if (IsNumeric(textBox1.Text, out V))
+                    {
+                        Power power= (Power)elecComp;
+                        power.voltage=V;
                         ReleaseChooses();
                     }
                     else

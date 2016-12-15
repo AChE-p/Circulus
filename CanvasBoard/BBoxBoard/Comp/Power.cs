@@ -15,17 +15,10 @@ namespace BBoxBoard.Comp
 {
     public class Power :ElecComp
     {
-        PowerElecFeature powerElecFeature;
+        public double voltage;
 
-        public Power(double _voltage ) : this()
-        {
-            powerElecFeature.voltage = _voltage;
-        }
-        public Power():base()
-        {
-            powerElecFeature = new PowerElecFeature();
-            powerElecFeature.voltage = 0;
-        }
+        public Power( ) : base() { }
+      
 
         public override void AddShapes()
         {
@@ -87,7 +80,10 @@ namespace BBoxBoard.Comp
 
         public override ElecFeature GetElecFeature()
         {
-            return powerElecFeature;
+            PowerElecFeature powerelecfeature = new PowerElecFeature();
+            powerelecfeature.voltage = voltage;
+       
+            return powerelecfeature;
         }
 
         class PowerElecFeature : ElecFeature

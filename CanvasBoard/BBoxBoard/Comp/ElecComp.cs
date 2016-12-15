@@ -309,15 +309,23 @@ namespace BBoxBoard.Comp
             return "" + Comp + " " + RotatedState + " " + XYPoint.X + " " +
                 XYPoint.Y + " " + PrintAttr();
         }
+        //public void ShowChooses(ElecComp elecComp_, IntPoint postion)
+        //{
+        //    IsNowShown = true;
+        //    elecComp = elecComp_;
+        //    //MessageBox.Show("Choose" + elecComp.Comp);
+        //    switch (elecComp.Comp)
         protected virtual String PrintAttr()
         {
-            //一定注意：不要在Attr里有空格！上一级以空格为分隔符
-            return "";
-        }
-        public virtual void HandleAttr(String attr)
+            
+        
+          //一定注意：不要在Attr里有空格！上一级以空格为分隔符
+        return "";
+      }
+     public virtual void HandleAttr(String attr)
         {
 
-        }
+       }
         public virtual void ShowMeter()
         {
 
