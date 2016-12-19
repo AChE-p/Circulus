@@ -45,6 +45,7 @@ namespace BBoxBoard
 
         public MainWindow()
         {
+            //吴越演示连接到github
             IsRuning = false;
             InitializeComponent();
             m_SyncContext = SynchronizationContext.Current;
