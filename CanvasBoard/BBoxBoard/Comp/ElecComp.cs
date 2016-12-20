@@ -48,7 +48,7 @@ namespace BBoxBoard.Comp
             Comp = -1;
             shapeSet = new ShapeSet();
             XYPoint = new IntPoint(0, 0);
-            size = new IntPoint(MainWindow.GridLen, MainWindow.GridLen);
+            size = new IntPoint(Core.GridLen, Core.GridLen);
             RelativeInterface = new List<IntPoint>();
             State = State_Move;
             IsWire = false;

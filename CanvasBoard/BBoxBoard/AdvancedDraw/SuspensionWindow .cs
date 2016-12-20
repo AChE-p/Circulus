@@ -13,15 +13,15 @@ namespace BBoxBoard.AdvancedDraw
 {
     public class SuspensionWindow
     {
-        MainWindow mainWindow;
+        Core core;
         public bool IsNowShown;
         TextBlock textBlock1;
         TextBox textBox1;
         ElecComp elecComp;
 
-        public SuspensionWindow(MainWindow mainWindow_)
+        public SuspensionWindow(Core core_)
         {
-            mainWindow = mainWindow_;
+            core = core_;
             IsNowShown = false;
         }
 
@@ -38,14 +38,14 @@ namespace BBoxBoard.AdvancedDraw
                     textBlock1.Text = "Ω";
                     Canvas.SetLeft(textBlock1, postion.X + 75);
                     Canvas.SetTop(textBlock1, postion.Y - 30);
-                    mainWindow.Mycanvas.Children.Add(textBlock1);
+                    core.Mycanvas.Children.Add(textBlock1);
                     textBox1 = new TextBox();
                     textBox1.Width = 70;
                     textBox1.Text = "" + ((Resistance)elecComp).R;
                     Canvas.SetLeft(textBox1, postion.X);
                     Canvas.SetTop(textBox1, postion.Y - 30);
                     textBox1.KeyUp += TextBox1_KeyUp;
-                    mainWindow.Mycanvas.Children.Add(textBox1);
+                    core.Mycanvas.Children.Add(textBox1);
                     break;
                 case ElecComp.Comp_Capacity:
                     textBlock1 = new TextBlock();
@@ -53,14 +53,14 @@ namespace BBoxBoard.AdvancedDraw
                     textBlock1.Text = "F";
                     Canvas.SetLeft(textBlock1, postion.X + 75);
                     Canvas.SetTop(textBlock1, postion.Y - 30);
-                    mainWindow.Mycanvas.Children.Add(textBlock1);
+                    core.Mycanvas.Children.Add(textBlock1);
                     textBox1 = new TextBox();
                     textBox1.Width = 70;
                     textBox1.Text = "" + ((Capacity)elecComp).C;
                     Canvas.SetLeft(textBox1, postion.X);
                     Canvas.SetTop(textBox1, postion.Y - 30);
                     textBox1.KeyUp += TextBox1_KeyUp;
-                    mainWindow.Mycanvas.Children.Add(textBox1);
+                    core.Mycanvas.Children.Add(textBox1);
                     break;
                 case ElecComp.Comp_Inductance:
                     textBlock1 = new TextBlock();
@@ -68,14 +68,14 @@ namespace BBoxBoard.AdvancedDraw
                     textBlock1.Text = "H";
                     Canvas.SetLeft(textBlock1, postion.X + 75);
                     Canvas.SetTop(textBlock1, postion.Y - 30);
-                    mainWindow.Mycanvas.Children.Add(textBlock1);
+                    core.Mycanvas.Children.Add(textBlock1);
                     textBox1 = new TextBox();
                     textBox1.Width = 70;
                     textBox1.Text = "" + ((Inductance)elecComp).L;
                     Canvas.SetLeft(textBox1, postion.X);
                     Canvas.SetTop(textBox1, postion.Y - 30);
                     textBox1.KeyUp += TextBox1_KeyUp;
-                    mainWindow.Mycanvas.Children.Add(textBox1);
+                    core.Mycanvas.Children.Add(textBox1);
                     break;
                 case ElecComp.Comp_Power:
                     textBlock1 = new TextBlock();
@@ -83,14 +83,14 @@ namespace BBoxBoard.AdvancedDraw
                     textBlock1.Text = "V";
                     Canvas.SetLeft(textBlock1, postion.X + 75);
                     Canvas.SetTop(textBlock1, postion.Y - 30);
-                    mainWindow.Mycanvas.Children.Add(textBlock1);
+                    core.Mycanvas.Children.Add(textBlock1);
                     textBox1 = new TextBox();
                     textBox1.Width = 70;
                     textBox1.Text = "" + ((Power)elecComp).voltage;
                     Canvas.SetLeft(textBox1, postion.X);
                     Canvas.SetTop(textBox1, postion.Y - 30);
                     textBox1.KeyUp += TextBox1_KeyUp;
-                    mainWindow.Mycanvas.Children.Add(textBox1);
+                    core.Mycanvas.Children.Add(textBox1);
                     break;
                 default:
                     IsNowShown = false;
@@ -112,12 +112,12 @@ namespace BBoxBoard.AdvancedDraw
             IsNowShown = false;
             if (textBox1 != null)
             {
-                mainWindow.Mycanvas.Children.Remove(textBox1);
+                core.Mycanvas.Children.Remove(textBox1);
                 textBox1 = null;
             }
             if (textBlock1 != null)
             {
-                mainWindow.Mycanvas.Children.Remove(textBlock1);
+                core.Mycanvas.Children.Remove(textBlock1);
                 textBlock1 = null;
             }
         }
