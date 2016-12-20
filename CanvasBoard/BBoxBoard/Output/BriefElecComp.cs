@@ -44,8 +44,10 @@ namespace BBoxBoard.Output
                 case Comp_Inductance:
                     A += "Inductance:";
                     break;
+              //@m 这里实现了部分元件类型转字符串，如果需要可以补充完整，如果后期调试结束不需要这段代码可以注释掉
                 default:
                     return "UNKNOWN";
+
             }
             foreach (IntPoint intPoint in Interfaces)
             {

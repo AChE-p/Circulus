@@ -118,6 +118,7 @@ namespace BBoxBoard.Comp
                 }
             }
         }
+        //@m这里是存档的函数
         public String PrintSavingAll()
         {
             String Str = "";
@@ -127,7 +128,7 @@ namespace BBoxBoard.Comp
             }
             return Str;
         }
-
+        //@m 这里是存档的调取
         public ElecComp AddFromRecord(int Comp, Canvas Mycanvas)
         {
             ElecComp elecComp = null;
@@ -153,10 +154,12 @@ namespace BBoxBoard.Comp
                     AddCompAndShow(i, Mycanvas);
                     elecComp = i;
                     break;
+                //@m这里需要补充其他元件的存档调取
+                //@m在补充完所有元件的attribute和 handleattri 之后 记得调取的时候要一并对应调取
             }
             return elecComp;
         }
-
+        
         public void ShowAllMeter()
         {
             foreach (ElecComp x in elecSet)

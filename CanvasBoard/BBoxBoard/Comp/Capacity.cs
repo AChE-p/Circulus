@@ -11,13 +11,12 @@ namespace BBoxBoard.Comp
 {
     public class Capacity : ElecComp
     {
-        public double C;
+        public double C=0.01;//默认电容
 
         public Capacity() : base() { }
-
+        //@d 这部分为电容的形状，除了左右端口的位置其余均可重写
         public override void AddShapes()
         {
-            C = 0.01; //默认电容
             //设置类型
             Comp = Comp_Capacity;
             /*//必须重新设置元件大小（已废弃）

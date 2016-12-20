@@ -12,7 +12,8 @@ namespace BBoxBoard.Equipment
 {
     public class oscilloscopeData
     {
-        public const int strokeThickness = 3;
+        public int strokeThickness = 3;
+        //@d 示波器的显示的线的宽度，也可以设置成可调节的，建议用拖动条调节
         public Path path;
         PathFigure pf;
         public int OsiWidth;

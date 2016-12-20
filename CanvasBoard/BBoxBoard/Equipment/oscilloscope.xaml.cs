@@ -27,9 +27,14 @@ namespace BBoxBoard.Equipment
         public const int ZeroLeft = 0;
         public const int OsiWidth = 750;
         public const int OsiHeight = 450;
-        public double FullTime = 100;
+        public double FullTime = 100;//@m 更改这个值更改示波器的时间缩放倍率
         //0：电压，1：电流
-        public double[] FullValue = new double[2] { 20, 1 };
+        public double[] FullValue = new double[2] { 20
+            /*@d
+            更改这个值更改示波器显示的电压的缩放倍率*/
+            , 1
+            /*@d 更改这个值更改示波器显示的电流缩放倍率*/ };
+        //建议写一个拖动条来实现这两个倍率的改变
         public SynchronizationContext m_SyncContext;
 
         public oscilloscope()

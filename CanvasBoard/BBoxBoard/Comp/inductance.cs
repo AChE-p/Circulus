@@ -17,6 +17,7 @@ namespace BBoxBoard.Comp
         public double L;
         public Inductance() : base() { }
 
+       
         public override void AddShapes()
         {
             //设置类型
@@ -28,6 +29,7 @@ namespace BBoxBoard.Comp
             //定义外部接口的位置
             RelativeInterface.Add(new IntPoint(0, 10)); //左端口
             RelativeInterface.Add(new IntPoint(100, 10)); //右端口
+             //@d 这里是接地的形状，从这里到本函数结尾可重写
             //左边的导线
             MyShape Shape_line1 = new MyShape(MyShape.Shape_Line);
             Line line1 = Shape_line1.GetLine();
@@ -78,6 +80,7 @@ namespace BBoxBoard.Comp
             Canvas.SetTop(circle2.GetEllipse(), 5);
             shapeSet.AddShape(circle2);
         }
+        //@d 这个函数还是在画图……可重写
         private void AddPoints(PointCollection pointC)
         {
             pointC.Add(new Point(20, 10.0));

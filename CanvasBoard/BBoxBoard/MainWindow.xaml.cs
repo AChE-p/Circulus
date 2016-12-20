@@ -45,13 +45,14 @@ namespace BBoxBoard
 
         public MainWindow()
         {
-            //吴越演示连接到github
+            
             IsRuning = false;
             InitializeComponent();
             m_SyncContext = SynchronizationContext.Current;
             suspensionWindow = new SuspensionWindow(this);
             
             StringArr = new List<string>();
+            //@d 这里是出现在页面上的元件列表
             StringArr.Add("电阻");
             StringArr.Add("电容");
             StringArr.Add("导线");
@@ -60,9 +61,10 @@ namespace BBoxBoard
             StringArr.Add("电压表");
             StringArr.Add("地");
             StringArr.Add("红色探针");
-            StringArr.Add("黑色探针");
+            StringArr.Add("蓝色探针");
             StringArr.Add("直流电源");
             StringArr.Add("交流电源");
+            //@@d
             this.elecCompList.ItemsSource = StringArr;
             this.elecCompList.MouseDoubleClick += ElecCompList_MouseDoubleClick;
             //UpdateList();
@@ -75,8 +77,7 @@ namespace BBoxBoard
             //elecCompSet.AddCompAndShow(new Resistance(), Mycanvas);
             //elecCompSet.AddCompAndShow(new Capacity(), Mycanvas);
             //resistance2.Move(100, 200);
-            this.KeyDown += MainWindow_KeyDown;
-            InitTest();
+            this.KeyDown += MainWindow_KeyDown;          
             this.start_button.Click += Start_button_Click;
             SyncProgess(100, "无任务"); //用这个函数异步更新ProgressBar的值
             mycondition = new condition();
@@ -116,37 +117,7 @@ namespace BBoxBoard
             this.IsRuning = false;
             MessageBox.Show("模拟结束！");
         }
-
-        private void InitTest()
-        {/*
-            Resistance r1 = new Resistance();
-            Resistance r2 = new Resistance();
-            Capacity c1 = new Capacity();
-            Capacity c2 = new Capacity();
-            Capacity c3 = new Capacity();
-            Wire w1 = new Wire();
-            Wire w2 = new Wire();
-            elecCompSet.AddCompAndShow(w1, Mycanvas);
-            elecCompSet.AddCompAndShow(w2, Mycanvas);
-            elecCompSet.AddCompAndShow(r1, Mycanvas);
-            elecCompSet.AddCompAndShow(r2, Mycanvas);
-            elecCompSet.AddCompAndShow(c1, Mycanvas);
-            elecCompSet.AddCompAndShow(c2, Mycanvas);
-            elecCompSet.AddCompAndShow(c3, Mycanvas);
-            r1.Move(200, 300);
-            r2.Move(200, 400);
-            c1.Move(280, 310);
-            c2.Move(300, 220);
-            c3.Move(300, 290);
-            w1.Move(200, 310);
-            w2.Move(400, 60);
-            w1.State = ElecComp.State_AdjRight;
-            w2.State = ElecComp.State_AdjRight;
-            w1.Move(150, -250);
-            w2.Move(-80, 180);
-            c1.RotateLeft();*/
-        }
-
+        //@d 定义主页面上的键盘操作，建议卸载帮助文档里
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.T) //Transform
@@ -404,7 +375,8 @@ namespace BBoxBoard
             base.OnClosing(e);
         }
 
-
+        //@d 这部分是用来调节计算模式的，相关参数在data里的condition 定义了，用的是menuitem实现的，
+        
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             mycondition.presion_condition = condition.presecion_condition_enum.fast_mode;

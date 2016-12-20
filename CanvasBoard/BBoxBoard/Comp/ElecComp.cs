@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 namespace BBoxBoard.Comp
 {
     public abstract class ElecComp
-    {
+    {//@d  这部分为元件类型编号，可能会用到
         public const int State_Move = 0;
         public const int State_AdjRight = 1;
         public const int Comp_NULL = -1;
@@ -27,7 +27,7 @@ namespace BBoxBoard.Comp
         public const int Comp_Probe = 8;
         public const int Comp_Power = 9;
         public const int Comp_ACPower = 10;
-
+//@@d
         protected ShapeSet shapeSet;
         protected IntPoint XYPoint;
         protected IntPoint size;
@@ -48,7 +48,7 @@ namespace BBoxBoard.Comp
             Comp = -1;
             shapeSet = new ShapeSet();
             XYPoint = new IntPoint(0, 0);
-            size = new IntPoint(MainWindow.GridLen, MainWindow.GridLen);
+            size = new IntPoint(MainWindow.GridLen, MainWindow.GridLen);//格点间距在主函数中定义的
             RelativeInterface = new List<IntPoint>();
             State = State_Move;
             IsWire = false;
@@ -304,6 +304,7 @@ namespace BBoxBoard.Comp
             }
             return new BriefElecComp(Comp, A, this);
         }
+        //@m 这里是用来存档的函数
         public String PrintSaving()
         {
             return "" + Comp + " " + RotatedState + " " + XYPoint.X + " " +
@@ -317,14 +318,15 @@ namespace BBoxBoard.Comp
         //    switch (elecComp.Comp)
         public virtual String PrintAttr()
         {
-            
+            //用以保存元件电学参数
         
-          //一定注意：不要在Attr里有空格！上一级以空格为分隔符
+          //@m 一定注意：不要在Attr里有空格！上一级以空格为分隔符
+          //@m 在各个元件里重写这个函数，范例见power
         return "";
       }
      public virtual void HandleAttr(String attr)
-        {
-
+        {//用以读取元件电学参数
+            //@m 同上
        }
         public virtual void ShowMeter()
         {

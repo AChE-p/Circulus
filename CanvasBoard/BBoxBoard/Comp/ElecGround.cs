@@ -11,6 +11,7 @@ namespace BBoxBoard.Comp
 {
     class ElecGround : ElecComp
     {
+        //@d 这里是接地的形状，除了端口以外都可以调
         public override void AddShapes()
         {
             Comp = Comp_Ground;
@@ -65,7 +66,7 @@ namespace BBoxBoard.Comp
             line3.GetLine().StrokeThickness = 3;
             shapeSet.AddShape(line3);
         }
-
+        //@@d 
         public override BriefElecComp GetBriefElecComp()
         {
             List<IntPoint> A = new List<IntPoint>();

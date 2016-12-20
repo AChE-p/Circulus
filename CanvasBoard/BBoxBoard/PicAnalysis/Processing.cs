@@ -29,6 +29,7 @@ namespace BBoxBoard.PicAnalysis
             double T = 0;
             //int Count = 0;
             double ProgdeltaT = lastingT / 100;
+            
             mainWindow.SyncProgess(0, "模拟中...(s)0");
             while (T < /*3e-4*/ lastingT)
             {
@@ -38,6 +39,7 @@ namespace BBoxBoard.PicAnalysis
                         T);
                     ProgdeltaT += lastingT / 100;
                 }
+
                 double[] QpArr = new double[ElecArr.Count];
                 for (int i = 0; i < ElecArr.Count; i++)
                 {

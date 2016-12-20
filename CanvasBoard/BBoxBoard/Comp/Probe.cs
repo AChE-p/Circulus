@@ -15,7 +15,7 @@ namespace BBoxBoard.Comp
     {
         private SolidColorBrush probeColor;
         private oscilloscopeData myOscilloscopeData;
-
+        //x 是探针的颜色，即显示屏上线的颜色
         public Probe(SolidColorBrush x, oscilloscopeData y) {
             probeColor = x;
             myOscilloscopeData = y;
@@ -29,6 +29,7 @@ namespace BBoxBoard.Comp
             //size.Y = 30;
             RelativeInterface.Add(new IntPoint(-1024, -1024)); //Ground
             RelativeInterface.Add(new IntPoint(20, 0)); //右端口
+            //@d 探针的形状，到本函数结束可重写
             //直线
             MyShape line0 = new MyShape(MyShape.Shape_Line);
             line0.GetLine().Stroke = System.Windows.Media.Brushes.Black;

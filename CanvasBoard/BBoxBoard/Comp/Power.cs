@@ -30,6 +30,7 @@ namespace BBoxBoard.Comp
             //定义外部接口的位置
             RelativeInterface.Add(new IntPoint(0, 10)); //左端口
             RelativeInterface.Add(new IntPoint(100, 10)); //右端口
+            //@d 直流电源形状 到本函数结尾可重写
             //左边的导线
             MyShape line1 = new MyShape(MyShape.Shape_Line);
             line1.GetLine().Stroke = System.Windows.Media.Brushes.BlueViolet;

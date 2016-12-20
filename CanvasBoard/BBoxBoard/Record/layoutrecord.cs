@@ -13,20 +13,23 @@ namespace BBoxBoard.Record
 {
     class LayoutRecord
     {
+        //保存
         public static void Save(ElecCompSet elecCompSet)
         {
             SaveCircDialog saveCircDialog = new SaveCircDialog();
             saveCircDialog.ShowDialog();
+            //@m 这句话是用来提示完成 保存的，可进行修改
             MessageBox.Show("Saving!");
             String SaveingStr = "";
             SaveingStr += elecCompSet.PrintSavingAll();
             byte[] myByte = System.Text.Encoding.UTF8.GetBytes(SaveingStr);
 
-            using (FileStream fsWrite = new FileStream(@"D:\1.circ", FileMode.Create))
+            using (FileStream fsWrite = new FileStream(@"D:\1.circ"/*@d 这是默认路径，默认文件名，可修改*/, FileMode.Create))
             {
                 fsWrite.Write(myByte, 0, myByte.Length);
             };
         }
+        //读取 
         public static void Read(ElecCompSet elecCompSet, Canvas Mycanvas)
         {
             OpenFileDialog fd = new OpenFileDialog();
