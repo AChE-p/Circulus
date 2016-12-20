@@ -23,7 +23,7 @@ namespace BBoxBoard.Equipment
     {
         public bool CanbeClosed = false;
         public List<oscilloscopeData> Datas;
-        public const int ZeroTop = 100;
+        public const int ZeroTop = 244;
         public const int ZeroLeft = 0;
         public const int OsiWidth = 750;
         public const int OsiHeight = 450;

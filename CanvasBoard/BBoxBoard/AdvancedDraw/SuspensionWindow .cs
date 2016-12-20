@@ -97,7 +97,7 @@ namespace BBoxBoard.AdvancedDraw
                 case ElecComp.Comp_ACPower:
                     textBlock1 = new TextBlock();
                     textBlock1.Width = 70;
-                    textBlock1.Text = "V (峰峰值)";
+                    textBlock1.Text = "V (幅值)";
                     Canvas.SetLeft(textBlock1, postion.X + 75);
                     Canvas.SetTop(textBlock1, postion.Y - 30);
                     mainWindow.Mycanvas.Children.Add(textBlock1);
