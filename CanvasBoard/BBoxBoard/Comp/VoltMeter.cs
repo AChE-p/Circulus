@@ -76,10 +76,10 @@ namespace BBoxBoard.Comp
             Canvas.SetTop(circle2.GetEllipse(), 5);
             shapeSet.AddShape(circle2);
 
-            showingData = new ShowingData("" + 101230 + "ohm");
+            showingData = new ShowingData("" +"v");
             ohmmeterWindow = new Voltmeter(this);
             ohmmeterWindow.Show();
-            showingData.SimpleData = "gagagag";
+            showingData.SimpleData = "我是一只电压表";
         }
         public override bool DeletingCmd(bool IsFinal)
         {
@@ -98,6 +98,10 @@ namespace BBoxBoard.Comp
                 return true;
             }
             return false;
+        }
+        public override void ShowMeter()
+        {
+            ohmmeterWindow.Activate();
         }
         public override ElecFeature GetElecFeature()
         {
@@ -119,7 +123,7 @@ namespace BBoxBoard.Comp
                 {
                     //MessageBox.Show("Show U!");
                     Tsum = 0;
-                    showingData.SimpleData = "" + (rQ / rC);
+                    showingData.SimpleData = "" + (rQ / rC)+"V";
                 }
                 return rQ;
             }

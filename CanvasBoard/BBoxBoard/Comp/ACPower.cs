@@ -16,25 +16,23 @@ namespace BBoxBoard.Comp
 {
     public class ACPower : ElecComp
     {
-        ACPowerElecFeature acpowerElecFeature;
+        public double  frequency;
+        public double  pp_value;
+        public Powermode  powermode;
 
         public ACPower(Powermode _powermode,double _frequency, double _pp_value ) :this()
         {
-            acpowerElecFeature.frequency = _frequency;
-            acpowerElecFeature.pp_value = _pp_value;
-            acpowerElecFeature.powermode = _powermode;
-            acpowerElecFeature.CommitAttr();
-
-
+           frequency = _frequency;
+           pp_value = _pp_value;
+           powermode = _powermode;
 
         }
         public ACPower() : base()
         {
-            acpowerElecFeature = new ACPowerElecFeature();
-            acpowerElecFeature.pp_value = 0;
-            acpowerElecFeature.frequency = 0;
-            acpowerElecFeature.powermode =0;
-            acpowerElecFeature.CommitAttr();
+           
+            pp_value = 0;
+            frequency = 0;
+            powermode =0;
         }
 
         public override void AddShapes()
@@ -97,14 +95,22 @@ namespace BBoxBoard.Comp
 
         public override ElecFeature GetElecFeature()
         {
-            return acpowerElecFeature;
+            ACPowerElecFeature acpowerelecfeature = new ACPowerElecFeature();
+            acpowerelecfeature.frequency = frequency;
+            acpowerelecfeature.pp_value = pp_value;
+            acpowerelecfeature.powermode = powermode;
+            acpowerelecfeature.CommitAttr();
+            return acpowerelecfeature;
+
         }
+        
 
         class ACPowerElecFeature : ElecFeature
         {
             public double frequency;
-            public Powermode powermode;
             public double pp_value;
+            public Powermode powermode;
+
             double period;
             double Tsum;
             public ACPowerElecFeature() : base()
@@ -151,6 +157,8 @@ namespace BBoxBoard.Comp
             }
 
         }
+
+       
     }
 }
 

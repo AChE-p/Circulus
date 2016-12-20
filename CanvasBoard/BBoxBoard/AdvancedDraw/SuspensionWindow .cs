@@ -16,7 +16,9 @@ namespace BBoxBoard.AdvancedDraw
         Core core;
         public bool IsNowShown;
         TextBlock textBlock1;
+        TextBlock textBlock2;
         TextBox textBox1;
+        TextBox textBox2;
         ElecComp elecComp;
 
         public SuspensionWindow(Core core_)
@@ -80,7 +82,7 @@ namespace BBoxBoard.AdvancedDraw
                 case ElecComp.Comp_Power:
                     textBlock1 = new TextBlock();
                     textBlock1.Width = 30;
-                    textBlock1.Text = "V";
+                    textBlock1.Text = "V (电压)";
                     Canvas.SetLeft(textBlock1, postion.X + 75);
                     Canvas.SetTop(textBlock1, postion.Y - 30);
                     core.Mycanvas.Children.Add(textBlock1);
@@ -92,6 +94,36 @@ namespace BBoxBoard.AdvancedDraw
                     textBox1.KeyUp += TextBox1_KeyUp;
                     core.Mycanvas.Children.Add(textBox1);
                     break;
+                case ElecComp.Comp_ACPower:
+                    textBlock1 = new TextBlock();
+                    textBlock1.Width = 70;
+                    textBlock1.Text = "V (幅值)";
+                    Canvas.SetLeft(textBlock1, postion.X + 75);
+                    Canvas.SetTop(textBlock1, postion.Y - 30);
+                    mainWindow.Mycanvas.Children.Add(textBlock1);
+                    textBox1 = new TextBox();
+                    textBox1.Width = 70;
+                    textBox1.Text = "" + ((ACPower)elecComp).pp_value;
+                    Canvas.SetLeft(textBox1, postion.X);
+                    Canvas.SetTop(textBox1, postion.Y - 30);
+                    textBox1.KeyUp += TextBox1_KeyUp;
+                    mainWindow.Mycanvas.Children.Add(textBox1);
+
+                    textBlock2 = new TextBlock();
+                    textBlock2.Width = 70;
+                    textBlock2.Text = " Hz(频率)";
+                    Canvas.SetLeft(textBlock2, postion.X + 75);
+                    Canvas.SetTop(textBlock2, postion.Y - 60);
+                    mainWindow.Mycanvas.Children.Add(textBlock2);
+                    textBox2 = new TextBox();
+                    textBox2.Width = 70;
+                    textBox2.Text = "" + ((ACPower)elecComp).frequency;
+                    Canvas.SetLeft(textBox2, postion.X);
+                    Canvas.SetTop(textBox2, postion.Y - 60);
+                    textBox2.KeyUp += TextBox2_KeyUp;
+                    mainWindow.Mycanvas.Children.Add(textBox2);
+
+                    break;
                 default:
                     IsNowShown = false;
                     elecComp = null;
@@ -99,7 +131,16 @@ namespace BBoxBoard.AdvancedDraw
             }
         }
 
+       
+
         private void TextBox1_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                EndInput();
+            }
+        }
+        private void TextBox2_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -119,6 +160,16 @@ namespace BBoxBoard.AdvancedDraw
             {
                 core.Mycanvas.Children.Remove(textBlock1);
                 textBlock1 = null;
+            }
+            if (textBox2 != null)
+            {
+                mainWindow.Mycanvas.Children.Remove(textBox2);
+                textBox2 = null;
+            }
+            if (textBlock2 != null)
+            {
+                mainWindow.Mycanvas.Children.Remove(textBlock2);
+                textBlock2 = null;
             }
         }
 
@@ -172,6 +223,30 @@ namespace BBoxBoard.AdvancedDraw
                     {
                         Power power= (Power)elecComp;
                         power.voltage=V;
+                        ReleaseChooses();
+                    }
+                    else
+                    {
+                        MessageBox.Show("输入不是数字");
+                    }
+                    break;
+                case ElecComp.Comp_ACPower:
+                    double  Vpp;
+                    double fre;
+                    if (IsNumeric(textBox1.Text, out Vpp))
+                    {
+                        ACPower acpower = (ACPower)elecComp;
+                        acpower.pp_value = Vpp;
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("输入不是数字");
+                    }
+                    if (IsNumeric(textBox2.Text, out fre))
+                    {
+                        ACPower acpower = (ACPower)elecComp;
+                        acpower.frequency =fre ;
                         ReleaseChooses();
                     }
                     else
