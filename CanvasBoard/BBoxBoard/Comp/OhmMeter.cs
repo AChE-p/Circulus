@@ -1,10 +1,5 @@
 ﻿using BBoxBoard.BasicDraw;
 using BBoxBoard.Equipment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using BBoxBoard.Output;
@@ -76,7 +71,7 @@ namespace BBoxBoard.Comp
             Canvas.SetTop(circle2.GetEllipse(), 5);
             shapeSet.AddShape(circle2);
 
-            showingData = new ShowingData("" + 101230 + "ohm");
+            showingData = new ShowingData(" " + "ohm");
             ohmmeterWindow = new Ohmmeter(this);
             ohmmeterWindow.Show();
             showingData.SimpleData = "我是一只欧姆表";
@@ -133,7 +128,7 @@ namespace BBoxBoard.Comp
                     double I = deltaQ / deltaT;
                     Meter_R = U / I - deltaT / rC;
                     Tsum = 0;
-                    showingData.SimpleData = "" + Meter_R;
+                    showingData.SimpleData = "" + Meter_R+"ohm";
                 }
                 rQ = rC * U;
                 return rQ;

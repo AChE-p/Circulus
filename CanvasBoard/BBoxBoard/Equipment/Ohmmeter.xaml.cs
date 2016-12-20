@@ -23,7 +23,6 @@ namespace BBoxBoard.Equipment
     {
         private OhmMeter ohmmterClass;
         public ShowingData showingData;
-        Line line;
 
         public Ohmmeter(OhmMeter ohmmterClass_)
         {
@@ -52,7 +51,6 @@ namespace BBoxBoard.Equipment
             }
             else
             {
-                showingData.SimpleData = "啦啦啦";
                 e.Cancel = true;
             }
         }

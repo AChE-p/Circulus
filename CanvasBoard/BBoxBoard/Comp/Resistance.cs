@@ -91,5 +91,9 @@ namespace BBoxBoard.Comp
                 return rQ;
             }
         }
+        public override string PrintAttr()
+        {
+            return "" + R;
+        }
     }
 }
