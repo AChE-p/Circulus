@@ -1,0 +1,51 @@
+﻿<Window x:Class="BBoxBoard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BBoxBoard"
+        mc:Ignorable="d"
+        Title="MainWindow" Background="#FFDBF9DB" Height="750" Width="1200" ResizeMode="CanMinimize">
+    <Grid>
+        <Canvas 
+            Name="Mycanvas"
+            Margin="200,0,0,0">
+            <Rectangle Fill="#FFF4F4F5" Height="80" Canvas.Left="10" Stroke="Black" Canvas.Top="10" Width="60"/>
+            <TextBlock x:Name="textBlock" Height="15.6" Canvas.Left="26.967" TextWrapping="Wrap" Text="删除" Canvas.Top="20.233" Width="24.8"/>
+            <Path Data="M121.9,79.1 C126.7,198.3 124.2,136.6 126.2,198.2 128.2,259.8 341.10016,176.6 108.59999,89.799998 -123.90017,2.9999994 400.19942,-31.799884 101.5,84.599993" Fill="#FF6C6CD7" Height="96.826" Canvas.Left="823.175" Stretch="Fill" Stroke="Black" Canvas.Top="10" Width="81.329"/>
+            <Ellipse Fill="Red" Height="18.977" Canvas.Left="883.578" Stroke="Black" Canvas.Top="37.097" Width="20.926"/>
+            <Path Data="M235.1,11.1 C366.3,209.5 367.80001,213.8 367.80001,213.8" Fill="#FF2ECD3B" Height="96.826" Canvas.Left="916.299" Stretch="Fill" Stroke="#FF1BED69" Canvas.Top="10" Width="63.585" StrokeThickness="10"/>
+            <Path Data="M235.1,11.1 C366.3,209.5 367.80001,213.8 367.80001,213.8" Fill="#FF2ECD3B" Height="96.826" Canvas.Left="903.6" Stretch="Fill" Stroke="#FF1BED69" Canvas.Top="9.816" Width="63.11" StrokeThickness="10" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <ProgressBar x:Name="progress" Height="28.8" Canvas.Top="692" Width="865.2"/>
+            <TextBlock x:Name="progressTextBlock" Height="44" Canvas.Left="865.2" TextWrapping="Wrap" Text="目前无任务" Canvas.Top="677.2" Width="128.8"/>
+
+
+        </Canvas>
+        <ListView x:Name="elecCompList" HorizontalAlignment="Left" Width="200" Height="648" VerticalAlignment="Top">
+        </ListView>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" TextWrapping="Wrap" Width="200" FontSize="20" Text="Hello World！" Margin="0,648,0,44.267"/>
+        <Button x:Name="start_button" Content="开始/中断模拟" HorizontalAlignment="Left" Height="44.267" VerticalAlignment="Bottom" Width="137.32" FontSize="18" FontFamily="Kozuka Mincho Pr6N H"/>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="44.267" VerticalAlignment="Bottom" Width="57.68" Margin="137.32,0,0,0">
+            <MenuItem Header="设置" InputGestureText="Ctrl+s">
+                <Separator />
+                <MenuItem Header="计算模式">
+                    <Separator />
+                    <MenuItem Header="快速模式" Click="MenuItem_Click_1"/>
+                    <MenuItem Header="普通模式" Click="MenuItem_Click_2"/>
+                    <MenuItem Header="高精度模式" Click="MenuItem_Click_3"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>
+
+            
