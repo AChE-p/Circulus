@@ -11,6 +11,7 @@ using System.Windows.Input;
 
 namespace BBoxBoard.AdvancedDraw
 {
+    //@d这个文件是用来设置右键更改元件属性的，元件的属性在comp里，具体样式可以更改
     public class SuspensionWindow
     {
         Core core;
@@ -81,7 +82,7 @@ namespace BBoxBoard.AdvancedDraw
                     break;
                 case ElecComp.Comp_Power:
                     textBlock1 = new TextBlock();
-                    textBlock1.Width = 30;
+                    textBlock1.Width = 70;
                     textBlock1.Text = "V (电压)";
                     Canvas.SetLeft(textBlock1, postion.X + 75);
                     Canvas.SetTop(textBlock1, postion.Y - 30);
@@ -172,7 +173,7 @@ namespace BBoxBoard.AdvancedDraw
                 textBlock2 = null;
             }
         }
-
+        //读入参数
         private void EndInput()
         {
             //MessageBox.Show(textBox1.Text);
@@ -253,6 +254,7 @@ namespace BBoxBoard.AdvancedDraw
                     {
                         MessageBox.Show("输入不是数字");
                     }
+                    //@d这里只写了调整频率和幅值，建议加一个选择的组件选择波形
                     break;
                 default:
                     break;

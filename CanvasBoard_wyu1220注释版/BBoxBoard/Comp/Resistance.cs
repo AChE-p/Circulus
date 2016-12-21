@@ -20,7 +20,7 @@ namespace BBoxBoard.Comp
             R = 1000;//默认电阻
             //设置类型
             Comp = Comp_Resistance;
-            /*//必须重新设置元件大小（已废弃）
+            /*//必须重新设置大小（已废弃）
             size.X = 100;
             size.Y = 20;*/
             //定义外部接口的位置
@@ -36,7 +36,7 @@ namespace BBoxBoard.Comp
             line1.GetLine().Y2 = 10;
             line1.GetLine().StrokeThickness = 5;
             shapeSet.AddShape(line1);
-            //中间的长方形
+            //中间的长方形喜欢bug
             MyShape rectangle = new MyShape(MyShape.Shape_Rectangle);
             rectangle.GetRectangle().Fill = System.Windows.Media.Brushes.Black;
             rectangle.GetRectangle().Width = 40;

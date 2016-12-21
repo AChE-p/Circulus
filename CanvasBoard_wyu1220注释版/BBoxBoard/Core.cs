@@ -354,7 +354,8 @@ namespace BBoxBoard
 
         public void ChangeVMode(int i)
         {
-            //改变速度
+            //@d 改变计算模式，具体参数在condition中定义，建议改成选项并且显示当前状态，默认为general_mode
+        
             switch (i)
             {
                 case 1:
