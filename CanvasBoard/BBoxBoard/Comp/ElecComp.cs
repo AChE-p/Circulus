@@ -48,7 +48,7 @@ namespace BBoxBoard.Comp
             Comp = -1;
             shapeSet = new ShapeSet();
             XYPoint = new IntPoint(0, 0);
-            size = new IntPoint(MainWindow.GridLen, MainWindow.GridLen);//格点间距在主函数中定义的
+            size = new IntPoint(Core.GridLen, Core.GridLen);//格点间距在主函数中定义的
             RelativeInterface = new List<IntPoint>();
             State = State_Move;
             IsWire = false;

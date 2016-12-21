@@ -17,25 +17,24 @@ namespace BBoxBoard.PicAnalysis
         double lastingT;
 
         public Processing(List<BriefElecComp> Arr_, double deltaT_, 
-            double lastingT_, MainWindow mainWindow)
+            double lastingT_, Core core)
         {
             deltaT = deltaT_;
             lastingT = lastingT_;
             ElecArr = new List<ElecFeature>();
             Arr = Arr_;
-            SimplifiedPic simplifiedPic = new SimplifiedPic(Arr, mainWindow);
+            SimplifiedPic simplifiedPic = new SimplifiedPic(Arr, core);
             ElecArr = simplifiedPic.FeatureArr;
             A = simplifiedPic.A; //获得变换矩阵
             double T = 0;
             //int Count = 0;
             double ProgdeltaT = lastingT / 100;
-            
-            mainWindow.SyncProgess(0, "模拟中...(s)0");
+            core.SyncProgess(0, "模拟中...(s)0");
             while (T < /*3e-4*/ lastingT)
             {
                 if (T > ProgdeltaT) //更新进度条
                 {
-                    mainWindow.SyncProgess((int)(100*T / lastingT), "模拟中...(s)" + 
+                    core.SyncProgess((int)(100*T / lastingT), "模拟中...(s)" + 
                         T);
                     ProgdeltaT += lastingT / 100;
                 }
@@ -83,7 +82,7 @@ namespace BBoxBoard.PicAnalysis
                 }
                 //MessageBox.Show(str);
             }
-            mainWindow.SyncProgess(100, "模拟结束");
+            core.SyncProgess(100, "模拟结束");
         }
     }
 }
