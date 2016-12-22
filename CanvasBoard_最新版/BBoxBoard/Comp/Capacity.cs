@@ -107,5 +107,13 @@ namespace BBoxBoard.Comp
         {
             return new CapacityElecFeature(C);
         }
+        public override string PrintAttr()
+        {
+            return "" + C;
+        }
+        public override void HandleAttr(string attr)
+        {
+            C = int.Parse(attr);
+        }
     }
 }

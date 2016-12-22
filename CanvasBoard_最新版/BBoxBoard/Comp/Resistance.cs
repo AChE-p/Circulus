@@ -96,5 +96,9 @@ namespace BBoxBoard.Comp
         {
             return "" + R;
         }
+        public override void HandleAttr(string attr)
+        {
+            R = int.Parse(attr);
+        }
     }
 }

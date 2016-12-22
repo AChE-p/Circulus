@@ -154,8 +154,18 @@ namespace BBoxBoard.Comp
                     AddCompAndShow(i, Mycanvas);
                     elecComp = i;
                     break;
-                //@m这里需要补充其他元件的存档调取
-                //@m在补充完所有元件的attribute和 handleattri 之后 记得调取的时候要一并对应调取
+                case ElecComp.Comp_Power:
+                    Power p = new Power();
+                    AddCompAndShow(p, Mycanvas);
+                    elecComp = p;
+                    break;
+                case ElecComp.Comp_ACPower:
+                    ACPower acp = new ACPower();
+                    AddCompAndShow(acp, Mycanvas);
+                    elecComp = acp;
+                    break;
+                    //@m这里需要补充其他元件的存档调取
+                    //@m在补充完所有元件的attribute和 handleattri 之后 记得调取的时候要一并对应调取
             }
             return elecComp;
         }

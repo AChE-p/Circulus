@@ -156,10 +156,26 @@ namespace BBoxBoard.Comp
                 rQ = rC * U;
                 return rQ;
             }
+           
 
         }
-
-       
+        public override string PrintAttr()
+        {
+            return "" + frequency +";"+pp_value+";"+powermode ;
+        }
+        public override void HandleAttr(string attr)
+        {
+            String[] _attr= attr.Split(';');
+            if (_attr.Length != 3)
+                Console.WriteLine("交流电源参数读取失败");
+            else
+            {
+                frequency = int.Parse(_attr[0]);
+                pp_value = int.Parse(_attr[1]);
+                powermode=(Powermode)Enum.Parse(typeof(Powermode), _attr[2]);
+                //这里强制类型转换
+            }
+        }
     }
 }
 

@@ -59,10 +59,11 @@ namespace BBoxBoard.Record
                         Console.WriteLine("    (" + j + "):" + singleSp[j]);
                     }
                     int Comp = int.Parse(singleSp[0]);
+
                     int RotateState = int.Parse(singleSp[1]);
                     int X = int.Parse(singleSp[2]);
                     int Y = int.Parse(singleSp[3]);
-                    //这里需要补充一句attribute
+
                     ElecComp x = elecCompSet.AddFromRecord(Comp, Mycanvas);
                     x.Move(X, Y);
                     for (int j = 0; j < RotateState; j++)
