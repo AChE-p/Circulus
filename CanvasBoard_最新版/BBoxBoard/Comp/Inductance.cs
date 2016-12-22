@@ -169,5 +169,13 @@ namespace BBoxBoard.Comp
                 return rQ;
             }
         }
+        public override string PrintAttr()
+        {
+            return "" + L;
+        }
+        public override void HandleAttr(string attr)
+        {
+            L = int.Parse(attr);
+        }
     }
 }

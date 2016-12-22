@@ -73,7 +73,7 @@ namespace BBoxBoard
             myOscilloscope = new oscilloscope();//示波器，只有一个实例
         }
 
-        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        public void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.T) //Transform
             {
@@ -110,6 +110,10 @@ namespace BBoxBoard
                 }
                 MessageBox.Show(str); //之前写的演示用的，注释掉，现在是打开文件*/
                 LayoutRecord.Read(elecCompSet, Mycanvas);
+            }
+            if (e.Key == Key.C)
+            {
+                OnClosing();
             }
         }
 

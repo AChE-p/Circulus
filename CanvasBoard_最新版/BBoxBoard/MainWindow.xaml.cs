@@ -27,6 +27,7 @@ namespace BBoxBoard
             this.elecCompList.ItemsSource = core.StringArr;
             this.elecCompList.MouseDoubleClick += ElecCompList_MouseDoubleClick;
             this.start_button.Click += Start_button_Click;
+            this.KeyDown += core.MainWindow_KeyDown;
         }
 
         private void ElecCompList_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -282,6 +282,12 @@ namespace BBoxBoard.Comp
                 case Comp_Capacity:
                     A += "Capacity";
                     break;
+                case Comp_ACPower:
+                    A += "ACPoWer";
+                    break;
+                case Comp_Power:
+                    A += "Power";
+                    break;
                 default:
                     return "NULL";
             }

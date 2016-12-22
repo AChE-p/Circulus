@@ -256,7 +256,8 @@ namespace BBoxBoard.AdvancedDraw
                     }
                     //@d这里只写了调整频率和幅值，建议加一个选择的组件选择波形
                     break;
-                default:
+
+                    default:
                     break;
             }
         }
